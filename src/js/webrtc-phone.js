@@ -303,7 +303,7 @@ var webrtcPhone = (function () {
                 var audioTracks = stream.getAudioTracks();
                 var videoTracks = stream.getVideoTracks();
 
-                Janus.attachMediaStream(remoteStreamAudio, new MediaStream(audioTracks));
+               // Janus.attachMediaStream(remoteStreamAudio, new MediaStream(audioTracks));
                 Janus.attachMediaStream(remoteStreamVideo, new MediaStream(videoTracks));
               },
               oncleanup: function () {
