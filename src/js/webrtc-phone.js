@@ -304,7 +304,7 @@ var webrtcPhone = (function () {
                 var videoTracks = stream.getVideoTracks();
 
                // Janus.attachMediaStream(remoteStreamAudio, new MediaStream(audioTracks));
-                Janus.attachMediaStream(remoteStreamVideo, new MediaStream(videoTracks));
+                Janus.attachMediaStream(remoteStreamVideo, stream);
               },
               oncleanup: function () {
                 Janus.log(" ::: Got a cleanup notification :::");
