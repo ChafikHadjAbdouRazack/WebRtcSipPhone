@@ -302,9 +302,9 @@ var webrtcPhone = (function () {
                 // retrieve stream track
                 var audioTracks = stream.getAudioTracks();
                 var videoTracks = stream.getVideoTracks();
-
-               // Janus.attachMediaStream(remoteStreamAudio, new MediaStream(audioTracks));
-                Janus.attachMediaStream(remoteStreamVideo, stream);
+                Janus.debug(JSON.stringify(stream));
+                Janus.attachMediaStream(remoteStreamAudio, new MediaStream(audioTracks));
+                Janus.attachMediaStream(remoteStreamVideo, new MediaStream(videoTracks));
               },
               oncleanup: function () {
                 Janus.log(" ::: Got a cleanup notification :::");
