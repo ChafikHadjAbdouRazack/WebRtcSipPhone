@@ -109,7 +109,7 @@ $(document).ready(function() {
 									Janus.debug("Consent dialog should be " + (on ? "on" : "off") + " now");
 									if(on) {
 										// Darken screen and show hint
-										$.blockUI({ 
+										/*$.blockUI({ 
 											message: '<div><img src="up_arrow.png"/></div>',
 											css: {
 												border: 'none',
@@ -118,10 +118,10 @@ $(document).ready(function() {
 												color: '#aaa',
 												top: '10px',
 												left: (navigator.mozGetUserMedia ? '-100px' : '300px')
-											} });
+											} });*/
 									} else {
 										// Restore screen
-										$.unblockUI();
+										//$.unblockUI();
 									}
 								},
 								mediaState: function(medium, on) {
@@ -243,7 +243,7 @@ $(document).ready(function() {
 																},
 																error: function(error) {
 																	Janus.error("WebRTC error:", error);
-																	bootbox.alert("WebRTC error... " + JSON.stringify(error));
+																	console.log("WebRTC error... " + JSON.stringify(error));
 																}
 															});
 													}
