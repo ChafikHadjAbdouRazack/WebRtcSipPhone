@@ -68,7 +68,7 @@ $(document).ready(function() {
 	// Initialize the library (console debug enabled)
 	Janus.init({debug: true, callback: function() {
 		// Use a button to start the demo
-		$('#start').one('click', function() {
+		$('#login-btn').one('click', function() {
 			$(this).attr('disabled', true).unbind('click');
 			// Make sure the browser supports WebRTC
 			if(!Janus.isWebrtcSupported()) {
@@ -90,10 +90,11 @@ $(document).ready(function() {
 									videocall = pluginHandle;
 									Janus.log("Plugin attached! (" + videocall.getPlugin() + ", id=" + videocall.getId() + ")");
 									// Prepare the username registration
+									registerUsername()
 									$('#videocall').removeClass('hide').show();
 									$('#login').removeClass('hide').show();
 									$('#registernow').removeClass('hide').show();
-									$('#register').click(registerUsername);
+									$('#call-video').click(doCall);
 									$('#username').focus();
 									$('#start').removeAttr('disabled').html("Stop")
 										.click(function() {
@@ -499,7 +500,7 @@ $(document).ready(function() {
 function checkEnter(field, event) {
 	var theCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
 	if(theCode == 13) {
-		if(field.id == 'username')
+		if(field.id == 'name')
 			registerUsername();
 		else if(field.id == 'peer')
 			doCall();
@@ -513,19 +514,19 @@ function checkEnter(field, event) {
 
 function registerUsername() {
 	// Try a registration
-	$('#username').attr('disabled', true);
-	$('#register').attr('disabled', true).unbind('click');
-	var username = $('#username').val();
+	$('#name').attr('disabled', true);
+	$('#login-btn').attr('disabled', true).unbind('click');
+	var username = $('#name').val();
 	if(username === "") {
 		bootbox.alert("Insert a username to register (e.g., pippo)");
-		$('#username').removeAttr('disabled');
-		$('#register').removeAttr('disabled').click(registerUsername);
+		$('#name').removeAttr('disabled');
+		$('#login-btn').removeAttr('disabled').click(registerUsername);
 		return;
 	}
 	if(/[^a-zA-Z0-9]/.test(username)) {
 		bootbox.alert('Input is not alphanumeric');
-		$('#username').removeAttr('disabled').val("");
-		$('#register').removeAttr('disabled').click(registerUsername);
+		$('#name').removeAttr('disabled').val("");
+		$('#login-btn').removeAttr('disabled').click(registerUsername);
 		return;
 	}
 	var register = { "request": "register", "username": username };
@@ -536,7 +537,7 @@ function doCall() {
 	// Call someone
 	$('#peer').attr('disabled', true);
 	$('#call').attr('disabled', true).unbind('click');
-	var username = $('#peer').val();
+	var username = $('#call-to').val();
 	if(username === "") {
 		bootbox.alert("Insert a username to call (e.g., pluto)");
 		$('#peer').removeAttr('disabled');
@@ -561,7 +562,7 @@ function doCall() {
 			success: function(jsep) {
 				Janus.debug("Got SDP!");
 				Janus.debug(jsep);
-				var body = { "request": "call", "username": $('#peer').val() };
+				var body = { "request": "call", "username": $('#call-to').val() };
 				videocall.send({"message": body, "jsep": jsep});
 			},
 			error: function(error) {

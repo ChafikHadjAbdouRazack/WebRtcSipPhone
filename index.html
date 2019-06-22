@@ -25,7 +25,7 @@
           </div>
           <div class="form-group">
             <label for="name">Nom d'affichage</label>
-            <input type="text" class="form-control" id="name" placeholder="e.g. Chafik" value="">
+            <input type="text" class="form-control" id="name" placeholder="e.g. Chafik" value="" onkeypress="return checkEnter(this, event);">
           </div>
           <div class="form-group">
             <label for="exten">Extension</label>
@@ -58,7 +58,7 @@
                   aria-haspopup="true" aria-expanded="false" disabled>Appel</button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" id="call-audio-btn" href="#">Audio</a>
-                  <a class="dropdown-item" id="start" href="#">Audio/Video</a>
+                  <a class="dropdown-item" id="call-video" href="#">Audio/Video</a>
                   <a class="dropdown-item" id="call-audio-conference-btn" href="#">Conférence Audio</a>
                   <a class="dropdown-item" href="#" id="call-audio-video-conference-btn">Conférence Audio/Video</a>
                 </div>

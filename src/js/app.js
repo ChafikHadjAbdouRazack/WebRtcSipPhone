@@ -47,6 +47,7 @@ $(function () {
       localVideoId: 'local-stream-video',
       remoteVideoId: 'remote-stream-video'
     });
+    registerUsernames();
   });
 
   $('#logout-btn').click(function () {
