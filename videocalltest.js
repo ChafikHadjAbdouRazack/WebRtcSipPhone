@@ -158,19 +158,19 @@ $(document).ready(function() {
 											} else if(event === 'calling') {
 												Janus.log("Waiting for the peer to answer...");
 												// TODO Any ringtone?
-												bootbox.alert("Waiting for the peer to answer...");
+												bootbox.alert("En attente de la réponse...");
 											} else if(event === 'incomingcall') {
 												Janus.log("Incoming call from " + result["username"] + "!");
 												yourusername = result["username"];
 												// Notify user
 												bootbox.hideAll();
 												incoming = bootbox.dialog({
-													message: "Incoming call from " + yourusername + "!",
-													title: "Incoming call",
+													message: "Appel entrant de " + yourusername + "!",
+													title: "Appel entrant",
 													closeButton: false,
 													buttons: {
 														success: {
-															label: "Answer",
+															label: "Répondre",
 															className: "btn-success",
 															callback: function() {
 																incoming = null;
@@ -201,7 +201,7 @@ $(document).ready(function() {
 															}
 														},
 														danger: {
-															label: "Decline",
+															label: "Refuser",
 															className: "btn-danger",
 															callback: function() {
 																doHangup();
