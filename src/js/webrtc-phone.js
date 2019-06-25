@@ -298,13 +298,7 @@ var webrtcPhone = (function () {
               onremotestream: function (stream) {
                 Janus.debug(" ::: Got a remote stream :::");
                 Janus.debug(JSON.stringify(stream));
-
-                // retrieve stream track
-                var audioTracks = stream.getAudioTracks();
-                var videoTracks = stream.getVideoTracks();
-                Janus.debug(JSON.stringify(stream));
-                Janus.attachMediaStream(remoteStreamAudio, new MediaStream(audioTracks));
-                Janus.attachMediaStream(remoteStreamVideo, new MediaStream(videoTracks));
+                Janus.attachMediaStream(remoteStreamVideo, stream);
               },
               oncleanup: function () {
                 Janus.log(" ::: Got a cleanup notification :::");
@@ -364,8 +358,8 @@ var webrtcPhone = (function () {
         media: {
           audioSend: true,
           audioRecv: true,
-          videoSend: video,
-          videoRecv: video
+          videoSend: false,
+          videoRecv: false
         },
         success: function (jsep) {
           Janus.debug("Got SDP!");
@@ -409,7 +403,7 @@ var webrtcPhone = (function () {
         jsep: currentJsep,
         media: {
           audio: true,
-          video: true
+          video: false
         },
         success: function (jsep) {
           Janus.debug("Got SDP! audio=" + true + ", video=" + true);

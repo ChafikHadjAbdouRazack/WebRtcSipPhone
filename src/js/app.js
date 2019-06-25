@@ -26,7 +26,9 @@ $(function () {
   });
 
   $(document).on('callaccepted', function (ev) {
-    $('#hangup-btn').removeAttr('disabled');
+    $('#hangup-btn').removeAttr('disabled').click(function () {
+      webrtcPhone.hangup();
+    });
     $('#call-btn,#call-to,#answer-btn').attr('disabled','disabled');
     $('#output-lbl').text('... en conversation avec ' + webrtcPhone.getCounterpartNum());
   });
@@ -47,12 +49,12 @@ $(function () {
       localVideoId: 'local-stream-video',
       remoteVideoId: 'remote-stream-video'
     });
-    registerUsernames();
   });
 
   $('#logout-btn').click(function () {
     webrtcPhone.hangup();
     webrtcPhone.logout();
+    doHangup()
   });
 
   $('#hangup-btn').click(function () {
